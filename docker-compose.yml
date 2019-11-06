@@ -46,6 +46,7 @@ services:
     ports:
       - 80:80
       - 443:443
+      - 587:587
     deploy:
       replicas: ${TRAEFIK_REPLICAS:-3}
       placement:
@@ -75,6 +76,7 @@ services:
       --constraints=tag==traefik-public
       --entrypoints='Name:http Address::80'
       --entrypoints='Name:https Address::443 TLS'
+      --entrypoints='Name:smtp Address::587'
       --consul
       --consul.endpoint="consul-leader:8500"
       --acme
